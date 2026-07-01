@@ -23,15 +23,21 @@ La présentation est le fichier **[`index.html`](index.html)**. Trois façons de
 
 Pour la faire tester à quelqu'un **sans qu'il ait besoin d'un compte Claude**, deux options :
 
-### Option rapide (aucune configuration)
-Un lien via githack qui sert directement le fichier du dépôt (voir le lien exact fourni dans la conversation, basé sur le dernier commit).
-
 ### Option recommandée — GitHub Pages (adresse propre et permanente)
-1. Va sur le dépôt GitHub → **Settings** → **Pages**
+Adresse : **https://pierreprz.github.io/Carla-pr-sentation-oral/**
+
+Si elle affiche une erreur 404, active Pages une fois :
+1. Dépôt GitHub → **Settings** → **Pages**
 2. *Source* : **Deploy from a branch**
-3. *Branch* : sélectionne la branche du projet, dossier **/ (root)** → **Save**
-4. Au bout d'une minute, ta présentation est en ligne à :
-   `https://pierreprz.github.io/Carla-pr-sentation-oral/`
+3. *Branch* : la branche du projet, dossier **/ (root)** → **Save**
+4. Attends ~1 minute, puis rouvre l'adresse ci-dessus.
+
+### Option instantanée (aucune configuration) — via githack
+Sert directement `index.html` depuis ce commit du dépôt public :
+
+```
+https://raw.githack.com/pierreprz/Carla-pr-sentation-oral/d34fc31a801109265cad134c2a91ab0e238f2223/index.html
+```
 
 ## 🛠️ Détails techniques
 
