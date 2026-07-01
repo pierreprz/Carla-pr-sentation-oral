@@ -14,10 +14,10 @@ La présentation est le fichier **[`index.html`](index.html)**. Trois façons de
 
 | Touche | Action |
 |--------|--------|
-| **A** | Passer / quitter le **plein écran** |
+| **A** | **Plein écran de la diapo seule** — masque la barre latérale des miniatures et agrandit la diapositive à tout l'écran (ré-appuyer pour revenir) |
 | **← / →**, Espace, Page ↑/↓ | Naviguer entre les diapositives |
 
-> Astuce présentation : ouvre la page, appuie sur **A** pour le plein écran, puis navigue avec les flèches.
+> Astuce présentation : ouvre la page, appuie sur **A** (diapo en plein écran, sans la barre de gauche), puis navigue avec les flèches.
 
 ## 🌐 Lien à partager
 

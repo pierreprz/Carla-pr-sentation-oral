@@ -27,27 +27,54 @@
   <script src="vendor/react.production.min.js"></script>
   <script src="vendor/react-dom.production.min.js"></script>
   <script src="vendor/babel.min.js"></script>
-  <!-- Plein ecran : appuyer sur la touche A bascule en plein ecran.  -->
-  <!-- Attache a window (capture) pour survivre au remplacement du    -->
-  <!-- document effectue par le bundler.                              -->
+  <!-- Touche A : plein ecran de la DIAPOSITIVE SEULE.                 -->
+  <!-- On combine deux choses :                                       -->
+  <!--   1) plein ecran navigateur (toute la surface de l'ecran) ;    -->
+  <!--   2) le mode "presenting" natif du composant deck-stage, via   -->
+  <!--      postMessage({__omelette_presenting:true}) : il masque la  -->
+  <!--      barre de miniatures de gauche, re-dimensionne la diapo    -->
+  <!--      pour remplir l'espace et cache la barre de navigation.    -->
+  <!-- Attache a window/document (persistent apres le swap du bundler).-->
   <script>
   (function () {
-    function toggleFullscreen() {
-      var el = document.documentElement;
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        var req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
-        if (req) req.call(el);
-      } else {
-        var exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
-        if (exit) exit.call(document);
-      }
+    function isFullscreen() {
+      return !!(document.fullscreenElement || document.webkitFullscreenElement ||
+                document.mozFullScreenElement || document.msFullscreenElement);
     }
+    function enterFullscreen() {
+      var el = document.documentElement;
+      var req = el.requestFullscreen || el.webkitRequestFullscreen ||
+                el.mozRequestFullScreen || el.msRequestFullscreen;
+      if (req) { try { req.call(el); } catch (e) {} }
+    }
+    function exitFullscreen() {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen ||
+                 document.mozCancelFullScreen || document.msExitFullscreen;
+      if (exit) { try { exit.call(document); } catch (e) {} }
+    }
+    // Bascule le mode presentation du deck (barre masquee + diapo re-ajustee).
+    function setPresenting(on) {
+      try { window.postMessage({ __omelette_presenting: !!on }, '*'); } catch (e) {}
+    }
+    // Garde la barre masquee tant qu'on est en plein ecran, la remet en sortie
+    // (y compris quand on quitte le plein ecran avec la touche Echap).
+    function onFullscreenChange() { setPresenting(isFullscreen()); }
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
     window.addEventListener('keydown', function (e) {
       var t = e.target;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
       if (e.key === 'a' || e.key === 'A') {
         e.preventDefault();
-        toggleFullscreen();
+        if (isFullscreen()) {
+          exitFullscreen();
+        } else {
+          enterFullscreen();
+          // Filet de securite : si le navigateur ne declenche pas
+          // fullscreenchange, on masque quand meme la barre.
+          setTimeout(function () { if (isFullscreen()) setPresenting(true); }, 150);
+        }
       }
     }, true);
   })();
