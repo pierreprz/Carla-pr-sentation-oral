@@ -36,7 +36,7 @@ Si elle affiche une erreur 404, active Pages une fois :
 Sert directement `index.html` depuis ce commit du dépôt public :
 
 ```
-https://raw.githack.com/pierreprz/Carla-pr-sentation-oral/4e1ca662a2718aeeb92ba32266efeab4f292e93e/index.html
+https://raw.githack.com/pierreprz/Carla-pr-sentation-oral/b68e765f2b1fbf4be06bca0858a7267550833dfe/index.html
 ```
 
 ## 🛠️ Détails techniques
